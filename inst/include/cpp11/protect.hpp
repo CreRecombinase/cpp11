@@ -253,7 +253,7 @@ inline void check_user_interrupt() { safe[R_CheckUserInterrupt](); }
 #ifdef CPP11_USE_FMT
 template <typename... Args>
 void stop [[noreturn]] (const char* fmt_arg, Args&&... args) {
-  std::string msg = fmt::format(fmt_arg, std::forward<Args>(args)...);
+  auto msg = fmt::format(fmt_arg, std::forward<Args>(args)...);
   safe.noreturn(Rf_errorcall)(R_NilValue, "%s", msg.c_str());
 }
 
